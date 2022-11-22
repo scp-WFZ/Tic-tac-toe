@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller">
+   <Pane id="base" fx:id="base_square" layoutX="150.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0">
+      <Rectangle fx:id="game_panel" arcHeight="5.0" arcWidth="5.0" fill="#f2f2f2" height="270.0" layoutX="15.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="270.0" />
+      <Line endX="170.0" layoutX="115.0" layoutY="105.0" startX="-100.0" />
+      <Line endX="170.0" layoutX="115.0" layoutY="195.0" startX="-100.0" />
+      <Line endX="170.0" layoutX="70.0" layoutY="150.0" rotate="270.0" startX="-100.0" />
+      <Line endX="170.0" layoutX="160.0" layoutY="151.0" rotate="90.0" startX="-100.0" />
+   </Pane>
+   <Label fx:id="result_label" layoutX="158.0" layoutY="14.0" prefHeight="29.0" prefWidth="271.0" text=" " textAlignment="CENTER">
+      <font>
+         <Font size="24.0" />
+      </font></Label>
+</AnchorPane>
