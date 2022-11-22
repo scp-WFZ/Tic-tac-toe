@@ -20,8 +20,7 @@ public class GameSever {
             try {
                 System.out.println("Server will exit");
                 for(Integer key: clientsMap.keySet()) {
-                    PrintWriter pw = new PrintWriter(new BufferedWriter
-                            (new OutputStreamWriter(clientsMap.get(key).socket.getOutputStream())), true);
+                    PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientsMap.get(key).socket.getOutputStream())), true);
                     pw.println("The Server is disconnected");
                 }
             }catch (Exception e){
@@ -50,7 +49,7 @@ public class GameSever {
     }
 
     public int match(int clientPort) {
-        for(Integer port: clientsMap.keySet()) {
+        for (Integer port: clientsMap.keySet()) {
             if (clientsMap.get(port).oppoPort == -1) {
                 clientsMap.get(port).setOppoPort(clientPort);
                 clientsMap.get(port).setTurn(1);
@@ -70,8 +69,7 @@ public class GameSever {
         public ClientThread(Client client) throws IOException {
             this.client = client;
             this.in = new BufferedReader(new InputStreamReader(client.socket.getInputStream()));
-            this.out = new PrintWriter(new BufferedWriter
-                    (new OutputStreamWriter(client.socket.getOutputStream())), true);
+            this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(client.socket.getOutputStream())), true);
         }
 
         @Override
@@ -79,7 +77,7 @@ public class GameSever {
             try {
                 while (true) {
                     String line;
-                    if((line = this.in.readLine())!=null){ // Receive message (x,y) from client
+                    if ((line = this.in.readLine())!=null){ // Receive message (x,y) from client
                         System.out.println("Server receive message: " + line
                                 + " from port " + this.client.socket.getPort()
                                 + " It's turn is: " + this.client.turn
@@ -88,8 +86,7 @@ public class GameSever {
                             System.out.println("The client " + client.socket.getPort() + " is disconnected");
                             if (this.client.oppoPort != -1) {
                                 Client oppo = clientsMap.get(this.client.oppoPort);
-                                PrintWriter pw = new PrintWriter(new BufferedWriter
-                                        (new OutputStreamWriter(oppo.socket.getOutputStream())), true);
+                                PrintWriter pw = new PrintWriter(new BufferedWriter(new OutputStreamWriter(oppo.socket.getOutputStream())), true);
                                 pw.println("Your opponent is disconnected!");
                             }
                             continue;
@@ -105,7 +102,7 @@ public class GameSever {
                                 String message = line + "," + this.client.tictoe;
                                 // Find the chessboard of (oppoport, port)
                                 ChessBoard curChessBoard = null;
-                                for(ChessBoard chessBoard : chessBoardList) {
+                                for (ChessBoard chessBoard : chessBoardList) {
                                     if (chessBoard.port1 == this.client.oppoPort || chessBoard.port2 == this.client.oppoPort) {
                                         curChessBoard = chessBoard;
                                         break;

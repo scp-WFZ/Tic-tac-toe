@@ -1,6 +1,8 @@
 package application;
 
 import application.controller.Controller;
+import java.io.PrintWriter;
+import java.net.Socket;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -10,9 +12,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.PrintWriter;
-import java.net.Socket;
-
+/**
+ * This is Game Client.
+ */
 public class GameClient extends Application {
 
     @Override

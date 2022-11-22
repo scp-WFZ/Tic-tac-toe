@@ -1,27 +1,21 @@
 package application.controller;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-
 import java.io.*;
 import java.net.Socket;
 import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+
 
 public class Controller implements Initializable {
     private static final int EMPTY = 0;
@@ -64,8 +58,7 @@ public class Controller implements Initializable {
         try {
             this.clientSocket = new Socket("127.0.0.1", 8888);
             this.in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            this.out = new PrintWriter(new BufferedWriter
-                    (new OutputStreamWriter(clientSocket.getOutputStream())), true);
+            this.out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream())), true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -81,13 +74,15 @@ public class Controller implements Initializable {
                     String line = null;
                     while (true) {
                         if((line = in.readLine()) != null){
-                            System.out.println("Client " + clientSocket.getPort() +" receive message: " + line);
+                            System.out.println("Client "
+                                    + clientSocket.getPort()
+                                    +" receive message: " + line);
                             if (line.contains("Game Over")) {
                                 String finalMessage = line;
                                 Platform.runLater(() -> {
                                     gameOver(finalMessage);
                                 });
-                            }else if(line.equals("Please wait for another player")) {
+                            }else if (line.equals("Please wait for another player")) {
                                 System.out.println(line);
                             }else if (line.contains("disconnected")) {
                                 System.out.println(line);
@@ -95,7 +90,7 @@ public class Controller implements Initializable {
                                 String[] strs = line.split(",");
                                 int x = Integer.parseInt(strs[0]);
                                 int y = Integer.parseInt(strs[1]);
-                                int v = (Objects.equals(strs[2], "X"))? -1 :1;
+                                int v = (Objects.equals(strs[2], "X"))? -1:1;
                                 Platform.runLater(() -> {
                                     drawChess(x, y, v);
                                 });
@@ -131,7 +126,7 @@ public class Controller implements Initializable {
         this.result_label.setText(message);
     }
 
-    public void drawChess (int x, int y, int v) {
+    public void drawChess(int x, int y, int v) {
         switch (v) {
             case 1:
                 drawCircle(x, y);
@@ -146,7 +141,7 @@ public class Controller implements Initializable {
         }
     }
 
-    public void drawCircle (int i, int j) {
+    public void drawCircle(int i, int j) {
         Circle circle = new Circle();
         base_square.getChildren().add(circle);
         circle.setCenterX(i * BOUND + BOUND / 2.0 + OFFSET);
@@ -157,7 +152,7 @@ public class Controller implements Initializable {
         flag[i][j] = true;
     }
 
-    public void drawLine (int i, int j) {
+    public void drawLine(int i, int j) {
         Line line_a = new Line();
         Line line_b = new Line();
         base_square.getChildren().add(line_a);
